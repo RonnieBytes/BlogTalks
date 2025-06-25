@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/link') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        .center-container {
+  margin: 20px auto; /* Center horizontally */
+  width: 680px; /* Shrink the width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content inside */
+  text-align: center;
+  padding: 20px;
+
+  border: 2px solid gold;
+  border-radius: 20px;
+  background-color: blue;
+  color: white; /* For better contrast */
+}
+
+</style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+        <div class="center-container"><h2><%=indiBlog.title%></h2></div>
+        <div class="center-container" style="background-color: blueviolet;"><p><%= indiBlog.body %></p></div>
+        <div style="float: right;"><h3 style="color: sandybrown; margin-right: 75px;">by <%= indiBlog.createdBy.fullName %></h3></div>
+        <!-- comment section -->
+         <br>
+         <form action="/<%=indiBlog._id%>" method="post">
+            <div class="center-container"mt-0>
+    <textarea class="form-control" name="commBody" placeholder="Add a comment" style="border-color:purple ;"></textarea>
+    <button type="submit" style="color:magenta">Post</button>
+  </div>
+         </form>
+         <div class="center-container" style="background-color  :rebeccapurple;">
+            <div style="float:left"><h3>Comments: <%= comments.length %></h3></div>
+            <% if (comments.length>0) {
+                     comments.forEach(comment => { %>
+                <img class="nav-link" src="/uploads/<%=comment.createdBy.profilePicUrl %>" style="object-fit: cover;border-radius: 50%;height: 55px;width: 55px;" ></img><p><%= comment.createdBy.fullName%>  :  <%= comment.body%></p>
+            <%}); 
+            } else {%>
+                <label>No comments yet</label>
+           <% } %>     
+        </div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/link') %>
+    <style>
+      body{background-color: black;}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+     <%- include('./partials/nav') %>
+     
+    <div class="container d-flex flex-wrap gap-3 justify-content-start">
+  <% if (typeof allBlogs !== 'undefined' && allBlogs.length > 0) { %>
+    <% allBlogs.forEach(blog => { %>
+      <div class="card" style="width: 18rem;background-color: blueviolet;">
+        <% if (blog.coverImgURl) { %>
+  <img src="/uploads/<%= blog.coverImgURl %>" class="card-img-top" alt="blog image">
+<% } else { %>
+  <img src="/uploads/defauldCoverImg.jpg" class="card-img-top" alt="default blog image">
+<% } %>
+
+        <div class="card-body">
+          <h5 class="card-title"><%= blog.title %></h5>
+          
+          <a href="/<%= blog._id %>" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No blogs available yet.</p>
+  <% } %>
+</div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>
