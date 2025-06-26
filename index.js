@@ -6,10 +6,12 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 //connect db
 // mongoUrl=process.env.
-mongoose.connect(process.env.MONGO_URL||'mongodb://127.0.0.1:27017/offProj1');
+mongoose.connect(process.env.MONGO_URL)
+  .then(() => console.log("MongoDB connected!"))
+  .catch(err => console.error("MongoDB connection error:", err.message));
 //middlewares
 ron.use(cookieParser());
-ron.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
+//ron.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
 ron.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 ron.use(express.json())
